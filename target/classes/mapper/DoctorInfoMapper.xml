@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wsn.dao.DoctorInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.wsn.bean.DoctorInfo" >
+    <result column="mac" property="mac" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="work_num" property="workNum" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="wage" property="wage" jdbcType="INTEGER" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mac, name, work_num, position, wage, department
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wsn.bean.DoctorInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from doctor_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.wsn.bean.DoctorInfoExample" >
+    delete from doctor_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wsn.bean.DoctorInfo" >
+    insert into doctor_table (mac, name, work_num, 
+      position, wage, department
+      )
+    values (#{mac,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{workNum,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{wage,jdbcType=INTEGER}, #{department,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wsn.bean.DoctorInfo" >
+    insert into doctor_table
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="workNum != null" >
+        work_num,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="wage != null" >
+        wage,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mac != null" >
+        #{mac,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="workNum != null" >
+        #{workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="wage != null" >
+        #{wage,jdbcType=INTEGER},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wsn.bean.DoctorInfoExample" resultType="java.lang.Integer" >
+    select count(*) from doctor_table
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update doctor_table
+    <set >
+      <if test="record.mac != null" >
+        mac = #{record.mac,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workNum != null" >
+        work_num = #{record.workNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wage != null" >
+        wage = #{record.wage,jdbcType=INTEGER},
+      </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update doctor_table
+    set mac = #{record.mac,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      work_num = #{record.workNum,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      wage = #{record.wage,jdbcType=INTEGER},
+      department = #{record.department,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
