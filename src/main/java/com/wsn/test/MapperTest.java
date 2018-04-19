@@ -21,6 +21,7 @@ import com.wsn.dao.DoctorInfoMapper;
 public class MapperTest {
 	@Autowired
 	private DoctorInfoMapper doctorInfoMapper;
+
 	@Test
 	public void testCRUD() throws NoSuchMethodError {
 
@@ -30,17 +31,42 @@ public class MapperTest {
 		 * mapper UserMapper bean = ioc.getBean(UserMapper.class);
 		 */
 		System.out.println("加油：" + doctorInfoMapper);
+
+		/**
+		 * 增加用户测试
+		 */
+//		 DoctorInfo doctorInfo = new DoctorInfo();
+//		 doctorInfo.setDepartment("医疗部");
+//		 doctorInfo.setMac(15828);
+//		 doctorInfo.setName("王金磊");
+//		 doctorInfo.setPosition("院长");
+//		 doctorInfo.setWage(125);
+//		 doctorInfo.setWorkNum("152210703126");
+//		 doctorInfoMapper.insert(doctorInfo);
 		
-		 // 1、插入数据库信息
+		 System.out.println("插入成功");
+		//
+
+		/**
+		 * 查询
+		 */
+		doctorInfoMapper.selectByExample(null);
+		System.out.println(doctorInfoMapper.selectByExample(null));
+
+		/**
+		 * s 删除测试
+		 */
+//		 doctorInfoMapper.deleteDoctor("152210703126");
+		/**
+		 * 修改测试
+		 */
 		 DoctorInfo doctorInfo = new DoctorInfo();
-		 doctorInfo.setDepartment("医疗部");
+		 doctorInfo.setDepartment("卫生部");
 		 doctorInfo.setMac(15828);
 		 doctorInfo.setName("王金磊");
 		 doctorInfo.setPosition("院长");
 		 doctorInfo.setWage(125);
 		 doctorInfo.setWorkNum("152210703126");
-		 doctorInfoMapper.insert(doctorInfo);
-		
-		 System.out.println("插入成功");
+		 doctorInfoMapper.updateDoctor(doctorInfo);
 	}
 }

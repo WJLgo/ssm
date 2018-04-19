@@ -19,4 +19,11 @@ public interface DoctorInfoMapper {
     int updateByExampleSelective(@Param("record") DoctorInfo record, @Param("example") DoctorInfoExample example);
 
     int updateByExample(@Param("record") DoctorInfo record, @Param("example") DoctorInfoExample example);
+
+	void deleteDoctor(String work_num);
+	
+	//@Param("doctor")DoctorInfo doctor 表示将doctor对象注入到自定义的变量doctor中
+	void updateDoctor(@Param("doctor")DoctorInfo doctor);
+	
+	
 }

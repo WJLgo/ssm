@@ -15,13 +15,13 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
-	<!-- 配置试图解析器，方便页面返回解析 -->
+	<!-- 配置视图解析器，方便页面返回解析 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 指定perfix(文件夹）,/WEB-INF/views/下都是视图 -->
 		<property name="prefix" value="/WEB-INF/views/"></property>
 		<!-- 文件夹下的所有后缀为 .jsp的文件 -->
-		<property name="suffix" value=".jsp"></property>
+		<property name="suffix" value=".html"></property>
 	</bean>
 
 	<!-- 两个标准配置 -->

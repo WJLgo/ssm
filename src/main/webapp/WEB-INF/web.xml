@@ -6,20 +6,18 @@
 	<display-name>wsn</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	<!-- 1、启动Spring的容器 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext.xml</param-value>
+		<param-value>classpath*:applicationContext.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+
 	<!-- 2、 spring的前端控制器 拦截所有请求 -->
 	<servlet>
 		<servlet-name>dispatcherServlet</servlet-name>
@@ -48,10 +46,6 @@
 		</init-param>
 		<init-param>
 			<param-name>forceRequestEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceResponseEncoding</param-name>
 			<param-value>true</param-value>
 		</init-param>
 	</filter>

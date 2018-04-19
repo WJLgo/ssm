@@ -36,7 +36,7 @@
 		<!-- 配置数据源,即jdbcurl等来链接数据库的，名字与上面的数据源配置的id相同 -->
 		<property name="dataSource" ref="poolDataSource"></property>
 		<!-- 指定mybatis的mapper文件的位置(mapper文件夹下的所有的xml文件 -->
-		<property name="mapperLocations" value="classpath:mapper/*xml"></property>
+		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
 	</bean>
 
 	<!-- 配置扫描器，将mybatis接口的实现加入到ioc容器中 -->
