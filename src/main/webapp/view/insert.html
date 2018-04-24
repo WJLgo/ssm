@@ -1,0 +1,238 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class="mui-icon mui-icon-left-nav mui-pull-left"
+			onclick="retIndex()"></a>
+		<h1 class="mui-title">插入节点</h1>
+	</header>
+	<div class="mui-content">
+		<div class="mui-input-row" style="margin-top: 5px;">
+			<input id="mac" type="password" class="mui-input"
+				style="text-align: center;" readonly="readonly">
+		</div>
+		<div class="mui-input-row">
+			<input id="name" type="text" class="mui-input-clear" placeholder="姓名"
+				style="text-align: center;">
+		</div>
+		<div class="mui-input-row">
+			<input id="work_num" type="text" class="mui-input-clear"
+				placeholder="工号" style="text-align: center;">
+		</div>
+		<div class="mui-input-row">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-collapse"><a id="position"
+					class="mui-navigate-right" href="#" style="text-align: center;">职位</a>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setPosition(this)" href="#">院长</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setPosition(this)" href="#">主管院长</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setPosition(this)" href="#">科室主任</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setPosition(this)" href="#">科室副主任</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setPosition(this)" href="#">护士长</a>
+						</p>
+					</div></li>
+			</ul>
+		</div>
+		<div class="mui-input-row" style="margin-top: 18px;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-collapse"><a id="wage"
+					class="mui-navigate-right" href="#" style="text-align: center;">工资</a>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setWage(this)">5000元</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setWage(this)">6000元</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setWage(this)">7000元</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setWage(this)">8000元</a>
+						</p>
+					</div>
+
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setWage(this)">9000元</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setWage(this)">10000元</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;">自定义</a>
+						</p>
+					</div></li>
+			</ul>
+		</div>
+		<div class="mui-input-row" style="margin-top: 18px;">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-collapse"><a id="department"
+					class="mui-navigate-right" href="#" style="text-align: center;">科室</a>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setDepartment(this)">心血管内科</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setDepartment(this)">消化内科</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setDepartment(this)">呼吸内科</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setDepartment(this)">泌尿内科</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setDepartment(this)">神经内科</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setDepartment(this)">血液科</a>
+						</p>
+					</div>
+					<div class="mui-collapse-content">
+						<p style="text-align: center;">
+							<a style="color: #000000;" onclick="setDepartment(this)">内分泌科</a>
+						</p>
+					</div></li>
+			</ul>
+		</div>
+		<button id="submit" type="button"
+			class="mui-btn mui-btn-blue mui-btn-block" style="margin-top: 20px;">提交</button>
+
+	</div>
+	<script src="../js/mui.min.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			//预加载页面
+			var mac = document.getElementById("mac");
+			mac.value = RndNum(5);
+		}
+		mui.init()
+		//随机生成mac地址
+		function RndNum(n) {
+			var rnd = "";
+			for (var i = 0; i < n; i++)
+				rnd += Math.floor(Math.random() * 10);
+			return rnd;
+		}
+		//提交按钮
+		document.getElementById('submit').addEventListener('tap', function() {
+			var mac = document.getElementById("mac").value;
+			var name = document.getElementById("name").value;
+			var work_num = document.getElementById("work_num").value;
+			var department = document.getElementById("department").text;
+			var wage = document.getElementById("wage").text;
+			var position = document.getElementById("position").text;
+			var req_mac = parseInt(mac);
+			var req_wage = parseInt(wage);
+			// 				alert(mac+name+work_num+department+position+req_wage);
+			if (name == undefined || work_num == undefined || department == "科室" || wage == "工资" || position == "职位") {
+				mui.alert("请填写完整的信息");
+			} else {
+				mui.ajax("http://localhost:8080/wsn/insertDoctor", {
+					data : {
+						mac : mac,
+						name : name,
+						work_num : work_num,
+						position : position,
+						wage : req_wage,
+						department : department,
+					},
+					contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+					dataType : 'json',
+					type : 'get',
+					timeout : 10000,
+					headers : {
+						'Content-Type' : 'application/json'
+					},
+					success : function(data) {
+						var result = data.msgCode;
+						if (result == 200) {
+							mui.toast("插入成功", {
+								duration : 500
+							});
+							mui.later(function() {
+								mui.openWindow({
+									url : 'insert.html',
+									list : 'insert'
+								})
+							}, 500)
+						}
+					},
+					error : function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+					}
+				});
+			}
+		})
+		function retIndex() {
+			mui.openWindow({
+				url : '../index.html',
+				list : 'index'
+			})
+		}
+		function setPosition(obj) {
+			var position = document.getElementById("position");
+			position.text = obj.text;
+		}
+	
+		function setWage(obj) {
+			var wage = document.getElementById("wage");
+			wage.text = obj.text;
+		}
+	
+		function setDepartment(obj) {
+			var department = document.getElementById("department");
+			department.text = obj.text;
+		}
+	</script>
+</body>
+
+</html>

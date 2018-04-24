@@ -19,7 +19,7 @@
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 指定perfix(文件夹）,/WEB-INF/views/下都是视图 -->
-		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="prefix" value="view/"></property>
 		<!-- 文件夹下的所有后缀为 .jsp的文件 -->
 		<property name="suffix" value=".html"></property>
 	</bean>

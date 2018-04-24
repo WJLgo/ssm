@@ -38,4 +38,11 @@ public class DoctorService {
 	public void deleteDoctor(String work_num){
 		doctorInfo.deleteDoctor(work_num);
 	}
+	/*
+	 * 按工号查询
+	 */
+	public List<DoctorInfo> getDoctorsByNum(String work_num) {
+		// TODO Auto-generated method stub
+		return doctorInfo.selectByNum(work_num);
+	}
 }

@@ -222,4 +222,7 @@
 		#{doctor.workNum,jdbcType=VARCHAR}
 		
 	</update>
+	<select id="selectByNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+	select * from doctor_table where work_num=#{work_num}
+	</select>
 </mapper>

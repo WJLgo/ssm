@@ -24,6 +24,8 @@ public interface DoctorInfoMapper {
 	
 	//@Param("doctor")DoctorInfo doctor 表示将doctor对象注入到自定义的变量doctor中
 	void updateDoctor(@Param("doctor")DoctorInfo doctor);
+
+	List<DoctorInfo> selectByNum(String work_num);
 	
 	
 }

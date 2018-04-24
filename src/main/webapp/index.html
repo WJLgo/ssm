@@ -1,32 +1,39 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<title>index.html</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://cdn.bootcss.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
-<script
-	src="https://cdn.bootcss.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-
-
-<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-
+<meta charset="UTF-8" />
+<title>主页</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link rel="stylesheet" type="text/css" href="css/mui.min.css" />
 </head>
 
 <body>
+	<div class="mui-content">
+		<header class="mui-bar mui-bar-nav" style="height: 50px;">
+			<h1 class="mui-title">医疗信息管理</h1>
+		</header>
+	</div>
+	<script src="js/mui.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
-		window.onload = function() {
-			$.ajax({
-				url : "http://localhost:8080/wsn/getDoctors",
-				type : "post",
-				success : function(data) {
-					console.log(data);
+		mui.init({
+			//子页面
+			subpages : [ {
+				url : 'view/mainView.html',
+				id : 'mainView.html',
+				styles : {
+					top : '45px',
+					bottom : '0px'
 				}
-			})
-		}
+			} ],
+			//监听Android手机的back、menu按键
+			keyEventBind : {
+				backbutton : true, //Boolean(默认true)关闭back按键监听
+				menubutton : true //Boolean(默认true)关闭menu按键监听
+			}
+		})
 	</script>
 </body>
+
 </html>

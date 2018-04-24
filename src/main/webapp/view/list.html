@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title></title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<link href="../css/mui.min.css" rel="stylesheet" />
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+		<a class=" mui-icon mui-icon-left-nav mui-pull-left"
+			onclick="retIndex()"></a>
+		<h1 class="mui-title">医生信息</h1>
+	</header>
+
+	<div class="mui-content" id="list">
+		<div class="mui-input-row mui-search">
+			<input id="searchDoc" onkeyup="searchDoc(event)" type="search"
+				class="mui-input-clear" placeholder="工号查询">
+		</div>
+		<ul class="mui-table-view" style="padding-top: 0px;" id="ul_list">
+		</ul>
+	</div>
+
+	<script src="../js/mui.min.js"></script>
+	<script type="text/javascript">
+		mui.init()
+		var sessionJson;
+		window.onload = function() {
+			//预加载页面
+			getData();
+		}
+		//将获取的数据显示在页面上
+		function setList(infos) {
+			var html = '<br>';
+			var docs = infos.info.DoctorInfo;
+			for (var i = 0; i < docs.length; i++) {
+				html += '<li class="mui-table-view-cell" onclick="Details(this)"><a style="width: 14%;padding-right:0px ;padding-left: 0px; margin: 0px;float: left;text-align: right;color: #007AFF;">姓名:</a>' +
+					'<input type="text" style="border: 0px;width: 30%;float: left;" readonly="readonly" value=' + docs[i].name + ' />' +
+					'<a style="width: 13%;padding-right:0px ;padding-left: 0px; margin: 0px;float: left;text-align: right;color: #007AFF;">工号:</a>' +
+					'<input type="text" style="border: 0px;width: 43%;float: left;" readonly="readonly" value=' + docs[i].workNum + ' /></li>'
+			}
+			html += '</br>';
+			if (html != '<br></br>') {
+				document.getElementById('ul_list').innerHTML = html;
+			} else {
+				mui.alert("抱歉，暂无信息", "无数据！", [ "确定" ], function() {
+					mui.openWindow({
+						url : '../index.html',
+						list : 'index'
+					})
+				})
+			}
+		}
+		//获取数据
+		function getData() {
+			mui.ajax('http://localhost:8080/wsn/getDoctors', {
+				data : {},
+				dataType : 'json',
+				type : 'post',
+				timeout : 10000,
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				success : function(data) {
+					//处理数据
+					//						var json = '{"info": {"DoctorInfo": [{"mac": 15828,	"name": "王金磊","workNum": "152210703126","position": "院长","wage": 125,"department": "卫生部"}, {"mac": 123,"name": "胡浩之","workNum": "15221576544",	"position": "护士长","wage": 10000,"department": "护士部"}]},"msg": "success",				"msgCode": 200			}	';
+					sessionJson = data;
+					setList(data);
+				},
+				error : function(e) {
+					//异常处理；
+					//console.log(e);
+				}
+			})
+		}
+		//详细信息页面
+		function Details(obj) {
+			var docs = sessionJson.info.DoctorInfo;
+			var name = obj.children[1].value;
+			var work_num = obj.children[3].value;
+			var wage;
+			var position;
+			var department;
+			var mac;
+			for (var i = 0; i < docs.length; i++) {
+				if ((docs[i].workNum) == (work_num)) {
+					mac = docs[i].mac;
+					wage = docs[i].wage;
+					position = docs[i].position;
+					department = docs[i].department;
+					sessionStorage.setItem("mac_info", mac);
+					sessionStorage.setItem("name_info", name);
+					sessionStorage.setItem("wage_info", wage);
+					sessionStorage.setItem("position_info", position);
+					sessionStorage.setItem("work_num_info", work_num);
+					sessionStorage.setItem("department_info", department);
+				}
+			}
+			//\n换行
+			var msg = "姓名：" + name + "\n职位:" + position + "\n部门:" + department + "\n工资:" + wage + "元\n工号：" + work_num + "\nmac地址:" + mac;
+			mui.confirm(msg, "详情", [ "返回", "删除", "修改信息 " ], function(e) {
+				if (e.index == 1) {
+					mui.confirm("是否删除该纪录", "删除", [ "确定", "返回" ], function(e) {
+						if (e.index == 0) {
+							mui.alert("该纪录将会永久删除不可撤销", "警告！", function() {
+								//该处填写删除信息
+								mui.ajax("http://localhost:8080/wsn/deleteDoctor", {
+									data : {
+										work_num : work_num,
+									},
+									dataType : 'json',
+									type : 'post',
+									timeout : 1000,
+									success : function(data) {
+										//分析数据是否删除成功
+										var result = data.msgCode;
+										if (result == 200) {
+											mui.closePopups();
+											mui.toast("删除成功", {
+												duration : 500,
+												type : 'div'
+											})
+											mui.later(function() {
+												mui.openWindow({
+													url : 'list.html',
+													list : 'list'
+												})
+											}, 500);
+										} else {
+											mui.alert("删除失败！", "警告！", function() {
+												mui.closePopups();
+											})
+										}
+									},
+									error : function(xhr, type, errorThrown) {
+										//异常处理；
+										console.log(type);
+									}
+								})
+							})
+						}
+					})
+				}
+				if (e.index == 2) {
+					mui.openWindow({
+						url : 'update.html',
+						id : 'updata'
+					})
+				}
+			});
+		}
+		//查询界面
+		function searchDoc(e) {
+			var search_val = document.getElementById("searchDoc").value;
+			var keyCode = e.keyCode;
+			if (keyCode == '13') {
+				e.preventDefault();
+				//搜索功能
+				var work_num = search_val;
+				mui.ajax('http://localhost:8080/wsn/getDocByNum', {
+					dataType : 'json',
+					type : 'get',
+					contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+					data : {
+						work_num : work_num,
+					},
+					timeout : 10000, //超时时间设置为10秒；
+					headers : {
+						'Content-Type' : 'application/json'
+					},
+					success : function(data) {
+						//服务器返回响应，根据响应结果，分析是否登录成功；
+						if (data.info.DoctorInfo.length != 0) {
+							setList(data);
+						} else {
+							mui.alert("未查询到信息", "警告", "返回", function() {
+								mui.openWindow({
+									url : 'list.html',
+									list : 'list'
+								})
+							})
+						}
+	
+					},
+					error : function(xhr, type, errorThrown) {
+						//异常处理；
+						console.log(type);
+					}
+				})
+	
+			}
+		}
+		function retIndex() {
+			mui.openWindow({
+				url : '../index.html',
+				list : 'index'
+			})
+		}
+	</script>
+</body>
+
+</html>
